@@ -1,8 +1,6 @@
-#include<Voltmeter.h>
-#include<BatteryMonitoring.h>
+#include<RainSensor.h>
 
-BatteryMonitoring monitor();
-
+RainSensor sensor(4);
 
 void setup()
 {
