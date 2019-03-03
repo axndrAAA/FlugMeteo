@@ -1,6 +1,7 @@
-#include"libs/Voltmeter/Voltmeter.h"
+#include<Voltmeter.h>
+#include<BatteryMonitoring.h>
 
-Voltmeter v_meter(0);
+BatteryMonitoring monitor();
 
 
 void setup()
@@ -10,7 +11,5 @@ void setup()
 
 void loop()
 {
-    Serial.print("Voltage: ");
-    Serial.print(v_meter.readVoltage());
-    delay(1000);
+
 }
