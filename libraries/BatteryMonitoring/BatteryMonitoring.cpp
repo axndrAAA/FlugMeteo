@@ -51,24 +51,28 @@ byte BatteryMonitoring::getBatStatus(bool isUpdate)
 void BatteryMonitoring::update(void)
 {
     voltage = voltmeter.readVoltage();
-    level = float_map(voltage, MIN_LION_VOLTAGE, MAX_LION_VOLTAGE, 0, 100);
     
     if(voltage > MAX_LION_VOLTAGE)
     {
         status = bat_status::HIGH_VOLTAGE;
+        level = 100;
         return;
     }
     else if (voltage < MIN_LION_VOLTAGE)
     {
         status = bat_status::LOW_VOLTAGE;
-        if (digitalRead(charge_sensor_pin))
-        {
-            status = bat_status::CHARGING;
-        }
+        level = 0;
     }
     else
     {
         status = bat_status::NORMAL;
+        level = float_map(voltage, MIN_LION_VOLTAGE, MAX_LION_VOLTAGE, 0, 100);
     }     
+
+    if (digitalRead(charge_sensor_pin))
+        {
+            status = bat_status::CHARGING;
+            level = float_map(voltage, MIN_LION_VOLTAGE, MAX_LION_VOLTAGE, 0, 100);
+        }
         
 }

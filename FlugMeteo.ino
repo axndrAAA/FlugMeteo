@@ -1,6 +1,6 @@
-#include<Voltmeter.h>
+#include<BatteryMonitoring.h>
 
-Voltmeter voltmeter(1);
+BatteryMonitoring bm(1, 2);
 
 void setup()
 {
@@ -9,7 +9,18 @@ void setup()
 
 void loop()
 {
-    Serial.print("V =");
-    Serial.println(voltmeter.readVoltage());
+    Serial.print("BatStatus = ");
+    Serial.print(bm.bat_status_name[bm.getBatStatus(true)]);
+
+    Serial.print("  | Vbat =");
+    Serial.print(bm.getBatVoltage(false));
+
+    Serial.print("  |  BatLevel = ");
+    Serial.print(bm.getBatLevel(false));
+    Serial.println("%");
+
+    
+
+
     delay(1000);
 }

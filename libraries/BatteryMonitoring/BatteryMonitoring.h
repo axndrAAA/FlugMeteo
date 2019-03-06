@@ -2,6 +2,7 @@
 #define BATTERY_MONITORING
 
 #include "Arduino.h"
+#include "string.h"
 #include <Voltmeter.h>
 
 #define MIN_LION_VOLTAGE 3.2
@@ -16,6 +17,13 @@ public:
         LOW_VOLTAGE,
         HIGH_VOLTAGE
     };
+
+    String bat_status_name[4] = {
+        "NORMAL",
+        "CHARGING",
+        "LOW_VOLTAGE",
+        "HIGH_VOLTAGE"
+         };
 
     /**
      * Default constructor
