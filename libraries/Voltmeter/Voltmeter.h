@@ -4,9 +4,10 @@
 
 #include "Arduino.h"
 
-#define R1 100000.0
-#define R2 10000.0
-#define V_REF 5.0
+#define R1 100200.0
+#define R2 9870.0
+#define V_REF 4.75
+#define ZERO_OFFSET 0.1
 
 class Voltmeter
 {

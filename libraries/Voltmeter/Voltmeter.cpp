@@ -13,7 +13,7 @@ Voltmeter::Voltmeter(int8_t a_pin):Voltmeter()
 }
 
 float Voltmeter:: readVoltage(void){
-    return analogRead(analog_pin) * coeff;
+    return analogRead(analog_pin) * coeff + ZERO_OFFSET;
 }
 
 
