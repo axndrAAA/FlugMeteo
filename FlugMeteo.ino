@@ -1,6 +1,8 @@
-#include<BatteryMonitoring.h>
+#include<WindVelocity.h>
 
-BatteryMonitoring bm(1, 2);
+#define DEBUG
+
+WindVelocity vel(2,true);
 
 void setup()
 {
@@ -9,18 +11,8 @@ void setup()
 
 void loop()
 {
-    Serial.print("BatStatus = ");
-    Serial.print(bm.bat_status_name[bm.getBatStatus(true)]);
-
-    Serial.print("  | Vbat =");
-    Serial.print(bm.getBatVoltage(false));
-
-    Serial.print("  |  BatLevel = ");
-    Serial.print(bm.getBatLevel(false));
-    Serial.println("%");
-
-    
-
+    Serial.print("Preshure = ");
+    Serial.println(vel.readP_dyn());
 
     delay(1000);
 }
