@@ -57,7 +57,7 @@ public:
      * if true -> update values, else return old one
      * @return battery  status - one of the bat_status enum
     */
-    byte getBatStatus(bool isUpdate);
+    bat_status getBatStatus(bool isUpdate);
 
     /**
      * updates all info about battery

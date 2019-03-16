@@ -39,7 +39,7 @@ uint8_t BatteryMonitoring::getBatLevel(bool isUpdate)
     return level;
 }
 
-byte BatteryMonitoring::getBatStatus(bool isUpdate)
+bat_status BatteryMonitoring::getBatStatus(bool isUpdate)
 {
     if(isUpdate)
     {
