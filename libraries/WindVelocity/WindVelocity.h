@@ -32,7 +32,7 @@ public:
      * @param a_pin     The pin uses for tachymeter (if uses)
      * @param isBMP280_SPI == true if BMP280 in pit_tube is connected by SPI
      */
-    WindVelocity(int8_t _tch_pin, bool isBMP280_SPI);
+    WindVelocity(bool isBMP280_SPI);
 
     /**
      * return P_full - P_stat

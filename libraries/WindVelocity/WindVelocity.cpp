@@ -8,7 +8,7 @@ WindVelocity::WindVelocity()
 
 }
 
-WindVelocity::WindVelocity(int8_t _tch_pin, bool isBMP280_SPI): tch_pin(_tch_pin)
+WindVelocity::WindVelocity(bool isBMP280_SPI): tch_pin(_tch_pin)
 {
     if(isBMP280_SPI){
         pit_tube = PitotTube(true);
