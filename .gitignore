@@ -30,6 +30,7 @@ modules.builtin
 *.lzma
 *.patch
 *.gcno
+*.asv
 
 #
 # Top-level generic files
@@ -106,3 +107,4 @@ m4/lt~obsolete.m4
 stamp-h1
 docs/doxygen
 
+test.asv
