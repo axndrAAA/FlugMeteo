@@ -17,8 +17,11 @@ void loop()
     Serial.print("P_FULL = ");
     Serial.print(vel.readP_full());
 
-    Serial.print("    Air density = ");
-    Serial.println(vel.getAirDensity(21.3,vel.readP_full() , 50.0));
+    Serial.print("    Air speed = ");
+    Serial.print(vel.readVabs(99302.02 , 50.0, 21.0));
+
+    Serial.print(" Heading = ");
+    Serial.println( vel.readVangle() );
 
 
 
