@@ -3,8 +3,13 @@
 #define WIND_VELOCITY
 
 #include "Arduino.h"
-#include <PitotTube.h>
 #include <HMC5883L_Simple.h>
+#include <Adafruit_BMP280.h>
+
+#define BMP_SCK  (13)
+#define BMP_MISO (12)
+#define BMP_MOSI (11)
+#define BMP_CS   (10)
 
 #define M_DRY_AIR 29.0 // mollar mass [g/moll]
 #define R_DRY_CONST 287.058  // gas constant for dry air[Dg/moll*K]
@@ -81,12 +86,18 @@ public:
     */
     Wind readVvector(float p_stat_air, float fi, float t_air= -100.0);
 
+    void init(bool isBMP280_SPI);
 
 private:
     int8_t tch_pin = 255; // tachymeter interrupt pin 
 
-    PitotTube pit_tube; //Pitot-Prandtel tube 
+    Adafruit_BMP280 pit_tube; //Pitot tube sensor
     //HMC5883L_Simple compass; // compass-magnetometer for measuring wind direction
+
+    /**
+     * initialize pressure sensor in Pitot tube
+    */
+    void init_BMP280(void);
 
 
 };
