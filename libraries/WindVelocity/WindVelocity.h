@@ -69,7 +69,7 @@ public:
      * @param t_air air temperature 
      * @return air density in kg/m^3
     */
-    float getAirDensity(float t_air, float p_stat_air, float fi);
+    float getAirDensity( float p_stat_air, float fi, float t_air);
 
     /**
      * returns air speed heading
@@ -92,12 +92,17 @@ private:
     int8_t tch_pin = 255; // tachymeter interrupt pin 
 
     Adafruit_BMP280 pit_tube; //Pitot tube sensor
-    //HMC5883L_Simple compass; // compass-magnetometer for measuring wind direction
+    HMC5883L_Simple compass; // compass-magnetometer for measuring wind direction
 
     /**
      * initialize pressure sensor in Pitot tube
     */
     void init_BMP280(void);
+
+    /**
+     * initialize 3x axis magnetometer
+    */
+    void init_HMC5883L(void);
 
 
 };
