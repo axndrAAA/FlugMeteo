@@ -10,6 +10,8 @@
 #define R_DRY_CONST 287.058  // gas constant for dry air[Dg/moll*K]
 #define R_STEAM_CONST 461.495   // gas constant for water steam[Dg/moll*K]
 
+#define TO_KELVIN(t_celsium) (t_celsium + 273.0)
+
 class WindVelocity
 {
 public:
@@ -35,11 +37,17 @@ public:
     WindVelocity(bool isBMP280_SPI);
 
     /**
-     * return P_full - P_stat
-     * @Pstat static air pressure
-     * @return Pdyn 
+     * return air pressure in pitot tube
+     * @return P_full 
     */
-   float readP_dyn();
+   float readP_full();
+
+   /**
+    * return P_full - P_stat
+    * @param p_stat static air pressure
+    * @return p_dyn
+   */
+    float readP_dyn(float p_stat);
 
     /** wind speed module
      * @param t_air air temperature
@@ -78,7 +86,7 @@ private:
     int8_t tch_pin = 255; // tachymeter interrupt pin 
 
     PitotTube pit_tube; //Pitot-Prandtel tube 
-    HMC5883L_Simple compass; // compass-magnetometer for measuring wind direction
+    //HMC5883L_Simple compass; // compass-magnetometer for measuring wind direction
 
 
 };
