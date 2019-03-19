@@ -2,6 +2,13 @@
 #include <Wire.h>
 #include<Adafruit_BMP280.h>
 
+#define DEBUG
+#ifdef DEBUG
+    #define log_info(M) Serial.println(M)
+#else
+	#define log_info(M)
+#endif
+
 PitotTube::PitotTube():Adafruit_BMP280()
 {
     init();
@@ -15,14 +22,11 @@ PitotTube::PitotTube(bool isI2C):Adafruit_BMP280(BMP_CS, BMP_MOSI, BMP_MISO,  BM
 void PitotTube::init(void)
 {
     if(begin(BMP280_ADDRESS_ALT)){
-        #ifdef DEBUG
-            Serial.println("The PitotTube initialized successfull.");
-        #endif
+        log_info("The PitotTube initialized successfull.");
     }else
     {
-        #ifdef DEBUG
-            Serial.println("The PitotTube initialize failed.");
-        #endif
+        log_info("Could not find a valid BMP280 sensor, check wiring!");
+        while (1);
     }
     
 
