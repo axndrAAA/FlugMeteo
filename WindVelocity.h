@@ -4,6 +4,7 @@
 
 #include "Arduino.h"
 #include "Adafruit_BMP280.h"
+#include "MedianFilter.h"
 #include <HMC5883L_Simple.h>
 
 #define BMP_SCK  (13)
@@ -14,6 +15,9 @@
 #define M_DRY_AIR 29.0 // mollar mass [g/moll]
 #define R_DRY_CONST 287.058  // gas constant for dry air[Dg/moll*K]
 #define R_STEAM_CONST 461.495   // gas constant for water steam[Dg/moll*K]
+
+#define PRES_FILTER_SIZE 21
+#define PRES_FILTER_SEED 0
 
 #define TO_KELVIN(t_celsium) (t_celsium + 273.0)
 
@@ -93,6 +97,8 @@ private:
 
     Adafruit_BMP280 pit_tube; //Pitot tube sensor
     HMC5883L_Simple compass; // compass-magnetometer for measuring wind direction
+
+    MedianFilter pres_filter;
 
     /**
      * initialize pressure sensor in Pitot tube

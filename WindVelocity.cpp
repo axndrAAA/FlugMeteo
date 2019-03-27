@@ -1,6 +1,8 @@
 #include "Arduino.h"
 #include"WindVelocity.h"
 #include "Adafruit_BMP280.h"
+#include "MedianFilter.h"
+
 #include<math.h>
 
 #define DEBUG
@@ -22,7 +24,8 @@ WindVelocity::WindVelocity(bool isBMP280_SPI)
 
 float WindVelocity:: readP_full()
 {
-    return pit_tube.readPressure();
+    
+    return pres_filter.in(pit_tube.readPressure() + 183.0);
 }
 
 float WindVelocity::readP_dyn(float p_stat)
@@ -75,6 +78,13 @@ void WindVelocity::init(bool isBMP280_SPI)
     init_BMP280();
 
     init_HMC5883L();
+
+    pres_filter = MedianFilter(PRES_FILTER_SIZE, PRES_FILTER_SEED);
+
+    while(readP_full() == 0.00){
+        /* code */
+    }
+    
     
 }
 
