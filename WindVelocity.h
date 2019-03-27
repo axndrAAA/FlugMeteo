@@ -3,8 +3,8 @@
 #define WIND_VELOCITY
 
 #include "Arduino.h"
+#include "Adafruit_BMP280.h"
 #include <HMC5883L_Simple.h>
-#include <Adafruit_BMP280.h>
 
 #define BMP_SCK  (13)
 #define BMP_MISO (12)
@@ -106,4 +106,4 @@ private:
 
 
 };
-#endif WIND_VELOCITY
+#endif

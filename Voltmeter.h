@@ -35,4 +35,4 @@ public:
      */
     float readVoltage(void);
 };
-#endif VOLTMETER
+#endif

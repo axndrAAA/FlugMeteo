@@ -1,5 +1,5 @@
 #include"BatteryMonitoring.h"
-#include <Voltmeter.h>
+#include "Voltmeter.h"
 #include"Arduino.h"
 
 float float_map(float x, float in_min, float in_max, float out_min, float out_max){
@@ -39,7 +39,7 @@ uint8_t BatteryMonitoring::getBatLevel(bool isUpdate)
     return level;
 }
 
-bat_status BatteryMonitoring::getBatStatus(bool isUpdate)
+BatteryMonitoring::bat_status BatteryMonitoring::getBatStatus(bool isUpdate)
 {
     if(isUpdate)
     {
@@ -54,24 +54,24 @@ void BatteryMonitoring::update(void)
     
     if(voltage > MAX_LION_VOLTAGE)
     {
-        status = bat_status::HIGH_VOLTAGE;
+        status = BatteryMonitoring::bat_status::HIGH_VOLTAGE;
         level = 100;
         return;
     }
     else if (voltage < MIN_LION_VOLTAGE)
     {
-        status = bat_status::LOW_VOLTAGE;
+        status = BatteryMonitoring::bat_status::LOW_VOLTAGE;
         level = 0;
     }
     else
     {
-        status = bat_status::NORMAL;
+        status = BatteryMonitoring::bat_status::NORMAL;
         level = float_map(voltage, MIN_LION_VOLTAGE, MAX_LION_VOLTAGE, 0, 100);
     }     
 
     if (digitalRead(charge_sensor_pin))
         {
-            status = bat_status::CHARGING;
+            status = BatteryMonitoring::bat_status::CHARGING;
             level = float_map(voltage, MIN_LION_VOLTAGE, MAX_LION_VOLTAGE, 0, 100);
         }
         

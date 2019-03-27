@@ -3,12 +3,12 @@
 
 #include "Arduino.h"
 #include <string.h>
-
-#include <WindVelocity.h>
 #include <DHT.h>
 #include <Adafruit_BMP280.h>
-#include <RainSensor.h>
-#include <BatteryMonitoring.h>
+
+#include "WindVelocity.h"
+#include "RainSensor.h"
+#include "BatteryMonitoring.h"
 
 /**
 //Settings and pinouts:
@@ -51,8 +51,8 @@ public:
     {
         float v_air;
         uint16_t air_v_ang;
-        uint8_t humidiy;
-        float tempereture;
+        uint8_t humidity;
+        float temperature;
         float pressure;
         bool is_raning;
         float bat_voltage;
@@ -90,4 +90,4 @@ private:
     BatteryMonitoring battery; // battery monitoring sensor
 };
 
-#endif STATION_H
+#endif

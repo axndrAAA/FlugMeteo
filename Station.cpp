@@ -1,5 +1,14 @@
 #include"Station.h"
 
+#include <string.h>
+#include "DHT.h"
+#include <Adafruit_BMP280.h>
+
+#include "WindVelocity.h"
+#include "RainSensor.h"
+#include "BatteryMonitoring.h"
+
+
 Station::Station()
 {
     areometer = WindVelocity(iS_AREOMETER_USE_SPI);
@@ -23,13 +32,12 @@ Station::Station()
 Station::MESSAGE Station::getMessage()
 {
     Station::MESSAGE ret;
-
     ret.humidity = dht.readHumidity();
     ret.temperature = dht.readTemperature();
     ret.pressure = barometer.readPressure();
     ret.is_raning = rain_sensor.isRaning(true);
     ret.bat_voltage = battery.getBatVoltage(true);
-    ret.bat_status = battery.getBatStatus();
+    ret.bat_status = battery.getBatStatus(false);
     ret.v_air = areometer.readVabs(ret.pressure,
                                     ret.humidity,
                                     ret.temperature);
@@ -42,17 +50,17 @@ String Station::getMessage_str()
 {
     String ret = "";
     float hum = dht.readHumidity();
-    ret += hum + "/";
+    ret += String(hum) + "/";
     float tempr = dht.readTemperature();
-    ret += tempr + "/";
+    ret += String(tempr) + "/";
     float press = barometer.readPressure(); 
-    ret += press + "/";
-    ret += areometer.readVabs(press,
+    ret += String(press) + "/";
+    ret += String(areometer.readVabs(press,
                               hum,
-                              tempr) + "/";
-    ret += rain_sensor.isRaning(true) + "/";
-    ret += battery.getBatVoltage(true) + "/";
-    ret += battery.getBatStatus() + "/";
+                              tempr)) + "/";
+    ret += String(rain_sensor.isRaning(true)) + "/";
+    ret += String(battery.getBatVoltage(true)) + "/";
+    ret += String(battery.getBatStatus(false)) + "/";
     
     return ret;
 }
