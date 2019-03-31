@@ -11,7 +11,7 @@
 
 Station::Station()
 {
-    areometer = WindVelocity(iS_AREOMETER_USE_SPI);
+    areometer = WindVelocity();
     
     dht = DHT(DHTPIN, DHTTYPE);
     
@@ -38,9 +38,7 @@ Station::MESSAGE Station::getMessage()
     ret.is_raning = rain_sensor.isRaning(true);
     ret.bat_voltage = battery.getBatVoltage(true);
     ret.bat_status = battery.getBatStatus(false);
-    ret.v_air = areometer.readVabs(ret.pressure,
-                                    ret.humidity,
-                                    ret.temperature);
+    ret.v_air = areometer.readVabs();
     ret.air_v_ang = areometer.readVangle();
     
     return ret;
@@ -55,9 +53,7 @@ String Station::getMessage_str()
     ret += String(tempr) + "/";
     float press = barometer.readPressure(); 
     ret += String(press) + "/";
-    ret += String(areometer.readVabs(press,
-                              hum,
-                              tempr)) + "/";
+    ret += String(areometer.readVabs()) + "/";
     ret += String(rain_sensor.isRaning(true)) + "/";
     ret += String(battery.getBatVoltage(true)) + "/";
     ret += String(battery.getBatStatus(false)) + "/";

@@ -1,25 +1,25 @@
 
 
-#include "Tachymeter.h"
+#include "WindVelocity.h"
 
-    Tachymeter tach(0);
+    WindVelocity vel;
 
 
 void setup()
 {
     Serial.begin(9600);
     Serial.println("Started.");
-    tach.init(); 
+    vel.init(0); 
 
 }
 
 void loop()
 {
-    Serial.print("RPM = ");
-    Serial.print(tach.readRPM());
+    Serial.print("V = ");
+    Serial.print(vel.readVabs());
 
-    Serial.print("   V = ");
-    Serial.println(tach.readLinearV(1000));
+    Serial.print("   Ang = ");
+    Serial.println(vel.readVangle());
     
     delay(300);
 }
