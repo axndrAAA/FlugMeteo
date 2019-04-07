@@ -14,9 +14,7 @@ Station::Station()
     areometer = WindVelocity();
     
     dht = DHT(DHTPIN, DHTTYPE);
-    
-    barometer = Adafruit_BMP280();
-    
+        
     #ifdef iS_BARO_USE_SPI
         barometer = Adafruit_BMP280(BMP_CS, BMP_MOSI, BMP_MISO,  BMP_SCK);
     #else
@@ -65,5 +63,35 @@ void Station::setRainSensorLimits(uint16_t lower, uint16_t upper)
 {
     rain_sensor.setLowerLimit(lower);
     rain_sensor.setUpperLimit(upper);
+}
+
+void Station::init(void)
+{
+    //areometer initializtion
+    areometer.init(AREOMETER_RPM_PIN);
+
+    //humidity and temperature sensor initializtion
+    dht.begin();
+
+    //barometer initializtion
+    init_baro();
+
+    //rain sensor and battery monitoring system have been initialized in its constructors
+
+}
+
+void Station::init_baro()
+{
+      if (!barometer.begin(BMP280_ADDRESS_ALT)) {
+    Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
+    while (1);
+  }
+
+  /* Default settings from datasheet. */
+  barometer.setSampling(Adafruit_BMP280::MODE_NORMAL,     /* Operating Mode. */
+                  Adafruit_BMP280::SAMPLING_X2,     /* Temp. oversampling */
+                  Adafruit_BMP280::SAMPLING_X16,    /* Pressure oversampling */
+                  Adafruit_BMP280::FILTER_X16,      /* Filtering. */
+                  Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
 }
 

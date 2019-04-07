@@ -23,10 +23,6 @@
 #define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
-#define iS_AREOMETER_USE_SPI true // == true if the areometer Adafruit_BMP280 sensor is 
-// connected via spi. == false if it's connected via i2c.
-
-
 //Uncomment if baro is connected via SPI
 //#define iS_BARO_USE_SPI 1
 #ifdef iS_BARO_USE_SPI
@@ -41,6 +37,9 @@
 
 #define BMS_V_METER_PIN 2 // analog pin uses for measuring voltage on accumulator
 #define BMS_CHARGE_STATUS_PIN 5 // Digital pin uses to indicate charging status 
+
+// Iinterrupt pin for rpm sensor in areometer
+#define AREOMETER_RPM_PIN 0
 
 class Station
 {
@@ -81,6 +80,11 @@ public:
     */
     void setRainSensorLimits(uint16_t lower, uint16_t upper);
 
+    /**
+     * initialize all sensors
+    */
+    void init(void);
+
 private:
     
     WindVelocity areometer; //wind vector sensor
@@ -88,6 +92,11 @@ private:
     Adafruit_BMP280 barometer;// air pressure sensor
     RainSensor rain_sensor; // rain sensor
     BatteryMonitoring battery; // battery monitoring sensor
+
+    /**
+     * initialize barometer sensor (bmp 280)
+    */
+    void init_baro(void);
 };
 
 #endif

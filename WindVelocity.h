@@ -47,6 +47,10 @@ public:
     */
     Wind readVvector();
 
+    /**
+     * initialize sensor
+     * @param tach_pin rpm sensor interrupt pin ( for nano = 1 or 2 only)
+    */
     void init(uint8_t tach_pin);
 
 private:

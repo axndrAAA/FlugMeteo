@@ -1,25 +1,23 @@
 
 
-#include "WindVelocity.h"
+#include "Station.h"
 
-    WindVelocity vel;
+    Station station;
 
 
 void setup()
 {
     Serial.begin(9600);
     Serial.println("Started.");
-    vel.init(0); 
+    station.init();
+    Serial.println("Initialized.");
 
 }
 
 void loop()
 {
-    Serial.print("V = ");
-    Serial.print(vel.readVabs());
+    Serial.print("StrMessage:  ");
+    Serial.print(station.getMessage_str());
 
-    Serial.print("   Ang = ");
-    Serial.println(vel.readVangle());
-    
-    delay(300);
+    delay(1000);
 }
